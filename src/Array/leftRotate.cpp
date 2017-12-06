@@ -32,7 +32,7 @@ void leftRotate(int arr[], int d, int n)
 /*
 
 存储临时arr[0]在一个临时变量,将arr[1]arr[0],arr[2]arr[1]…最后临时arr(n - 1)
-让我们采取同样的例子arr[]=[1、2、3、4、5、6、7),由一个2 d = 2旋转arr[]times
+让我们采取同样的例子arr[]=[1、2、3、4、5、6、7),由一个2 d = 2旋转arr[]次
 我们得到[2,3,4,5,6,7,1]之后第一个旋转和[3、4、5、6、7、1、2]之后第二次旋转。
 */
 void leftRotate(int arr[], int d, int n)
