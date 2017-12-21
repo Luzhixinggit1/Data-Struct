@@ -130,5 +130,50 @@ void leftRotatef(int arr[], int d, int n)
 	rvereseArray(arr,0, n - 1);
 }
 
+/*
+五、方法五：
+将数组分成A[0,..d-1]，和B[d.。。n-1]
+按照下面的规则分割A和B直到A等于B
+a,如果A更短，则把B分成Bl(左)和Br(右)两部分，且Br的长度等于A，交换Br和A,此时的A就处在它最终的位置
+  将接下来的B部分分割成A和B和前面一样
+b,如果A更长，则把A分成Al(左）和Ar(右）两部分，且Al的部分等于B,交换Al和B,此时的B就处在最终的位置
+  将接下来的A继续进行前面的操作
+c,A等于B,任务完成
+*/
 
+//将数组的某两个部分交换
+void swap(int array[], int fi, int si, int d)
+{
+	int i, temp;
+	for (i = 0; i < d; i++)
+	{
+		temp = array[fi + i];
+		array[fi + i] = array[si + i];
+		array[si + i] = temp;
+	}
+}
+
+void leftRotate(int arr[], int d, int n)
+{
+	if (d == 0 || d == n)
+		return;
+	//如果A等于B则直接交换
+	if (n - d == d)
+	{
+		swap(arr, 0, n - d, d);
+		return;
+	}
+	//A更短
+	else if (d < n - d)
+	{
+		swap(arr, 0, n - d, d);
+		leftRotate(arr, d, n - d);
+	}
+	//A更长
+	else
+	{
+		swap(arr, 0, d, n - d);
+		leftRotate(arr + n - d, 2 * d - n, d);
+	}
+}
 
