@@ -1,3 +1,10 @@
+#include <iomanip>
+#include <iostream>
+#include <vector>
+using namespace std;
+
+#define MAX 100
+
 class MatrixUDG
 {
 private:
