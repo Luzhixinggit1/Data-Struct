@@ -1,5 +1,5 @@
 /**
- * 快速排序：c++
+ * 直接插入排序：c++
  * 编程环境：VS2015
  *
  * author:lzx
@@ -14,37 +14,36 @@ using namespace std;
  *    
  *    参数说明：
  *        arr ---   待排序的数组
- *        left ---  数组的左边界 
- *        right---  数组的右边界
+ *        n ------  待排序数组的长度
  */
 
-void quickSort(int *arr, int left, int right)
+void inserSort(int *arr, int n)
 {
-	if (left < right)
+	int i, j, k;
+
+	for (i = 1; i < n; i++)
 	{
-		int i, j, x;
-
-		i = left;
-		j = right;
-		x = arr[i];
-
-		while (i < j)
+		//在a[i]前面找到一个合适的位置
+		for (j = i - 1; j >= 0; j--)
 		{
-			while (i<j&&arr[j]>x)
-				j--;
-			if (i < j)
-				arr[i++] = arr[j];
-			while (i < j&&arr[i] < x)
-				i++;
-			if (i < j)
-				arr[j--] = arr[i];
-
+			if (arr[j] < arr[i])
+				break;   //找到了所在位置，退出内层循环
 		}
-		arr[i] = x;
-		quickSort(arr, left, i - 1);
-		quickSort(arr, i + 1, right);
+
+		//找到了合适的位置
+		if (j != i - 1)   //若等于则不需要处理
+		{
+			//比arr[i]大的数据往后移动
+			int temp = arr[i];
+			for (k = i - 1; k > j; k--)
+				arr[k + 1] = arr[k];
+
+			arr[k + 1] = temp;
+		}
 	}
 }
+
+
 
 int main()
 {
@@ -58,7 +57,7 @@ int main()
 		cout << a[i] << " ";
 	cout << endl;
 
-	quickSort(a, 0, ilen - 1);
+	inserSort(a, ilen);
 
 	cout << "after  sort:";
 	for (i = 0; i<ilen; i++)
